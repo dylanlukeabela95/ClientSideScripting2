@@ -1,18 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <label class="navbar-brand" href="#">Cart ({{ itemValue }})</label>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <a class="nav-link active" aria-current="page" href="#"
-          >Remove Products</a
-        >
-      </div>
-    </div>
-  </nav>
   <table>
     <thead>
       <tr>
-        <h1>{{ variants[hoverValue].occupation }} {{variants[hoverValue].item}}</h1>
+        <h1>
+          {{ variants[hoverValue].occupation }} {{ variants[hoverValue].item }}
+        </h1>
       </tr>
       <tr>
         <h5>{{ variants[hoverValue].subTitle }}</h5>
@@ -65,7 +57,7 @@
       >
       <span
         v-else-if="
-          variants[hoverValue].quantity <= 8 &&
+          variants[hoverValue].quantity < 10 &&
           variants[hoverValue].quantity > 0
         "
         style="color: blue"
@@ -78,26 +70,28 @@
     </li>
     <li>
       <br />
-      <span id="FreeShippingText">Shipping: Free</span>
+      <span :primeMember="primeMember" v-if="primeMember">Shipping: Free</span>
+      <span :primeMember="primeMember" v-else>Shipping: $2.99</span>
     </li>
   </ul>
 </template>
 
 <script>
 export default {
+  emits: ["update-cart"],
   props: {
-      item:{
-          type:String,
-      },
-      occupation:{
-          type:String,
-      },
-      image:{
-          type:String,
-      },
-      quantity:{
-          type:Number,
-      }
+    item: {
+      type: String,
+    },
+    occupation: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    quantity: {
+      type: Number,
+    },
   },
   data() {
     return {
@@ -130,10 +124,10 @@ export default {
           quantity: 0,
         },
       ],
-
       itemValue: 0,
       hoverValue: 0,
       inStock: true,
+      primeMember: true,
     };
   },
 
@@ -141,6 +135,7 @@ export default {
     addItem() {
       if (this.inStock) {
         this.itemValue++;
+        this.$emit("update-cart", this.itemValue);
       }
     },
 
@@ -189,7 +184,7 @@ ul {
   float: left;
   list-style: none;
   margin-top: 225px;
-  width: 25%;
+  width: 10%;
 }
 
 #greenCircle,
@@ -198,6 +193,7 @@ ul {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  margin-top: 10px;
   display: inline-block;
   border: 1px solid black;
 }
