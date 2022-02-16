@@ -1,38 +1,43 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <label class="navbar-brand" href="#">Cart ({{ itemValue }})</label>
+      <label class="navbar-branC:\GitHub\Year2Sem2\ClientSideScripting2\RevisionExercise\01-vue-cli\images\shoes.jpgd" href="#">Cart ({{ cart.length }})</label>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <a class="nav-link active" aria-current="page" href="#" @click="removeProducts">Remove Products</a>
       </div>
     </div>
   </nav>
   <content-page
+  :primeMember="primeMember"
   @update-cart="updateCartValue"></content-page>
 </template>
 
 <script>
 export default {
-  props:{
-    primeMember:{
-      type: Boolean,
-      default: true,
-    }
-  },
+  // props:{
+  //   primeMember:{
+  //     type: Boolean,
+  //     default: true,
+  //   }
+  // },
 
   data(){
     return{
+            cart:[],
+            primeMember: true,
             itemValue: 0,
     }
   },
   methods:{
-    updateCartValue(newItemValue){
-      this.itemValue = newItemValue;
+    updateCartValue(newId){
+      this.cart[this.itemValue] = newId;
+      this.itemValue++;
     },
 
     removeProducts()
     {
       this.itemValue = 0;
+      this.cart = [];
     },
   }
 };

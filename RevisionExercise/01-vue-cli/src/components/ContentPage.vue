@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <h1>
-          {{ variants[hoverValue].occupation }} {{ variants[hoverValue].item }}
+          {{title}}
         </h1>
       </tr>
       <tr>
@@ -20,7 +20,8 @@
           type="button"
           class="btn btn-primary"
           @click="addItem"
-          :class="{ disabledButton: !inStock }"
+          :class="{ disabledButton: !checkStock() }"
+          :disabled="!checkStock()"
         >
           Add To Cart
         </button>
@@ -29,13 +30,20 @@
   </table>
 
   <ul>
-    <li @mouseover="showWhite">
+    <li v-for="(variant, index) in variants"
+    :key="variant.id"
+    @mouseover="updateVariant(index)"
+    class="color-circle"
+    :style="{backgroundColor:variant.color}">
+
+    </li>
+    <!-- <li @mouseover="showWhite">
       <span
         id="whiteCircle"
         :style="{ backgroundColor: variants[0].color }"
       ></span>
-    </li>
-    <li @mouseover="showGreen">
+    </li> -->
+    <!-- <li @mouseover="showGreen">
       <span
         id="greenCircle"
         :style="{ backgroundColor: variants[1].color }"
@@ -46,32 +54,32 @@
         id="redCircle"
         :style="{ backgroundColor: variants[2].color }"
       ></span>
-    </li>
+    </li> -->
     <li>
       <br />
       <span
-        v-if="variants[hoverValue].quantity > 8"
+        v-if="inStock() >= 10"
         style="color: green"
-        v-bind="(inStock = true)"
+        
         ><strong>In Stock</strong></span
       >
       <span
         v-else-if="
-          variants[hoverValue].quantity < 10 &&
-          variants[hoverValue].quantity > 0
+          inStock() < 10 &&
+          inStock() > 0
         "
         style="color: blue"
-        v-bind="(inStock = true)"
+        
         ><strong>Almost Sold Out</strong></span
       >
-      <span v-else style="color: red" v-bind="(inStock = false)"
+      <span v-else style="color: red" 
         ><strong>Out of Stock</strong></span
       >
     </li>
     <li>
       <br />
-      <span :primeMember="primeMember" v-if="primeMember">Shipping: Free</span>
-      <span :primeMember="primeMember" v-else>Shipping: $2.99</span>
+      <span v-if="primeMember">Shipping: Free</span>
+      <span v-else>Shipping: $2.99</span>
     </li>
   </ul>
 </template>
@@ -92,6 +100,9 @@ export default {
     quantity: {
       type: Number,
     },
+    primeMember:{
+      type: Boolean,
+    }
   },
   data() {
     return {
@@ -102,7 +113,7 @@ export default {
           item: "Mug",
           occupation: "Coffee",
           subTitle: "Price: $30.00",
-          image: require("G:/GitHub/Year2Sem2/ClientSideScripting2/RevisionExercise/01-vue-cli/public/images/mug.jpg"),
+          image: require("C:/GitHub/Year2Sem2/ClientSideScripting2/RevisionExercise/01-vue-cli/images/mug.jpg"),
           quantity: 20,
         },
         {
@@ -111,7 +122,7 @@ export default {
           item: "Shoes",
           occupation: "Football",
           subTitle: "Price: $60.00",
-          image: require("G:/GitHub/Year2Sem2/ClientSideScripting2/RevisionExercise/01-vue-cli/public/images/shoes.jpg"),
+          image: require("C:/GitHub/Year2Sem2/ClientSideScripting2/RevisionExercise/01-vue-cli/images/shoes.jpg"),
           quantity: 8,
         },
         {
@@ -120,36 +131,61 @@ export default {
           item: "Bag",
           occupation: "School",
           subTitle: "Price: $40.00",
-          image: require("G:/GitHub/Year2Sem2/ClientSideScripting2/RevisionExercise/01-vue-cli/public/images/schoolbag.jpg"),
+          image: require("C:/GitHub/Year2Sem2/ClientSideScripting2/RevisionExercise/01-vue-cli/images/schoolbag.jpg"),
           quantity: 0,
         },
       ],
       itemValue: 0,
       hoverValue: 0,
-      inStock: true,
-      primeMember: true,
+      // inStock: true,
+      // primeMember: true,
     };
   },
-
+  computed:{
+    title(){
+      return this.variants[this.hoverValue].occupation + " " + this.variants[this.hoverValue].item;
+    }
+  },
   methods: {
     addItem() {
       if (this.inStock) {
-        this.itemValue++;
-        this.$emit("update-cart", this.itemValue);
+        
+        this.$emit("update-cart", this.id);
       }
     },
 
-    showWhite() {
-      this.hoverValue = 0;
+    updateVariant(index){
+      this.hoverValue = index;
     },
 
-    showGreen() {
-      this.hoverValue = 1;
+    inStock()
+    {
+      return this.variants[this.hoverValue].quantity;
     },
 
-    showRed() {
-      this.hoverValue = 2;
-    },
+    checkStock()
+    {
+      if(this.inStock() > 0)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+
+    // showWhite() {
+    //   this.hoverValue = 0;
+    // },
+
+    // showGreen() {
+    //   this.hoverValue = 1;
+    // },
+
+    // showRed() {
+    //   this.hoverValue = 2;
+    // },
   },
 };
 </script>
@@ -195,6 +231,15 @@ ul {
   border-radius: 50%;
   margin-top: 10px;
   display: inline-block;
+  border: 1px solid black;
+}
+
+.color-circle {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-left: 35px;
   border: 1px solid black;
 }
 
