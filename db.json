@@ -1,1 +1,31 @@
-test
+{
+    "variants": [
+        {
+          "id": 1,
+          "color": "white",
+          "item": "Mug",
+          "occupation": "Coffee",
+          "subTitle": "Price: $30.00",
+          
+          "quantity": 20
+        },
+        {
+          "id": 2,
+          "color": "green",
+          "item": "Shoes",
+          "occupation": "Football",
+          "subTitle": "Price: $60.00",
+          
+          "quantity": 8
+        },
+        {
+          "id": 3,
+          "color": "red",
+          "item": "Bag",
+          "occupation": "School",
+          "subTitle": "Price: $40.00",
+          
+          "quantity": 0
+        }
+      ]
+}
