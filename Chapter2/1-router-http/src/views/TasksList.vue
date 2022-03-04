@@ -6,10 +6,22 @@
 </template>
 
 <script>
+/* eslint-disable*/
 import TaskCard from '../components/TaskCard.vue'
+import TasksServices from '../services/TasksServices.js'
+import axios from 'axios'
 
 export default {
   components: { TaskCard },
+  created () {
+    TasksServices.getTasks()
+    .then(response => {
+      this.tasks = response.data
+    })
+    .catch(error => {
+      console.log("ERRORS" + error)
+    })
+  },
   data () {
     return {
       tasks: null
