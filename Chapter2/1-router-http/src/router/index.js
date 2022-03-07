@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TasksList from '../views/TasksList.vue'
 import About from '../views/About.vue'
-
+import TaskDetails from '../views/TaskDetails.vue'
+/* eslint-disable*/
 const routes = [
   {
       path: '/',
@@ -12,6 +13,12 @@ const routes = [
       path: '/about',
       name: 'About',
       component: About
+  },
+  {
+      path: '/tasks/:id',
+      name: 'TaskDetails',
+      props: true,
+      component: TaskDetails
   }
 ]
 
