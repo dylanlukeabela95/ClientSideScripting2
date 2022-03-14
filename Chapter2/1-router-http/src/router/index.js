@@ -7,7 +7,9 @@ const routes = [
   {
       path: '/',
       name: 'TasksList',
-      component: TasksList
+      component: TasksList,
+      //if page exists parse the string to an integer otherwise return 1
+      props: route => ({page: parseInt(route.query.page) || 1})
   },
   {
       path: '/about',
@@ -19,7 +21,7 @@ const routes = [
       name: 'TaskDetails',
       props: true,
       component: TaskDetails
-  }
+  },
 ]
 
 const router = createRouter({
