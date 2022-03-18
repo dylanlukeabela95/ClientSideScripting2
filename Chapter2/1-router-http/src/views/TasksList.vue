@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 24rem; margin-left: 37%">
+  <div class="card" style="width: 21%; margin-left: 40%; ">
     <h3>
       <strong>You are on page {{ page }}</strong>
     </h3>
@@ -71,41 +71,21 @@ export default {
     return {
       tasks: null,
       totalTasks: 0,
-      // [
-      //   {
-      //     id: 1,
-      //     title: 'Task 1',
-      //     description: 'Description for task 1',
-      //     location: 'Valletta',
-      //     date: '1st of Jan',
-      //     time: '12.00'
-      //   },
-      //   {
-      //     id: 2,
-      //     title: 'Task 2',
-      //     description: 'Description for task 2',
-      //     location: 'Valletta',
-      //     date: '1st of Jan',
-      //     time: '12.00'
-      //   },
-      //   {
-      //     id: 3,
-      //     title: 'Task 3',
-      //     description: 'Description for task 3',
-      //     location: 'Valletta',
-      //     date: '1st of Jan',
-      //     time: '12.00'
-      //   }
-      // ]
+
     };
   },
 };
 </script>
 
 <style>
+h3{
+  padding: 10px;
+}
+
 .pagination {
   display: flex;
-  width: 382px;
+  width: 385px;
+  margin-left: 1%;
 }
 
 .pagination a {

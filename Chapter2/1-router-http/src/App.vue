@@ -1,5 +1,9 @@
 <template>
   <div>
+    <!-- Display flash message if it is not blank -->
+    <div id="flashMessage" v-if="GStore.flashMessge != ''">
+      {{GStore.flashMessge}}
+    </div>
     <div id="nav">
       <router-link to="/">Tasks</router-link> |
       <router-link to="/about">About</router-link>
@@ -7,6 +11,12 @@
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  inject: ['GStore']
+}
+</script>
 
 <style>
 #app {
@@ -29,4 +39,20 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+@keyframes bluefade{
+  from{
+    background: lightblue;
+  }
+
+  to{
+    background: transparent;
+  }
+}
+
+#flashMessage{
+  animation-name: bluefade;
+  animation-duration: 3s;
+}
+
 </style>

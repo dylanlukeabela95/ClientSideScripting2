@@ -1,14 +1,19 @@
 <template>
   <div v-if="task" class="task-details">
     <h1>{{ task.title }}</h1>
-    <p>{{ task.time }} on {{ task.date }} @ {{ task.location }}</p>
-    <p>{{ task.description }}</p>
+    <div id="nav">
+      <router-link :to="{name:'TaskDetails', params: {id}}">Details | </router-link>
+      <router-link :to="{name:'TaskEdit', params:{id}}">Edit | </router-link>
+      <router-link :to="{name:'TaskDelete', params:{id}}">Delete </router-link>
+    </div>
+    <!-- sending task which is fetched from API below -->
+    <router-view :task="task"/> <!-- this is where the children components will be displayed on screen -->
   </div>
 </template>
 
 <script>
 /* eslint-disable*/
-import TasksService from "../services/TasksServices.js";
+import TasksService from "../../services/TasksServices.js";
 export default {
   props: ["id"],
   data() {
