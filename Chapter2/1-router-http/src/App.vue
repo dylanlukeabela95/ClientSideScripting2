@@ -1,21 +1,30 @@
 <template>
   <div>
     <!-- Display flash message if it is not blank -->
-    <div id="flashMessage" v-if="GStore.flashMessge != ''">
-      {{GStore.flashMessge}}
-    </div>
     <div id="nav">
       <router-link to="/">Tasks</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view />
+    <transition name="fade">
+      <div v-if="GStore.flashMessage != ''">
+        {{ GStore.flashMessage }}
+         <button @click="GStore.flashMessage = ''" class="btn btn-secondary">Close</button>
+      </div>
+    </transition>
+    <router-view  v-slot="{ Component }">
+      <transition name="slide-fade" mode="out-in">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
+
   </div>
 </template>
 
 <script>
+/* eslint-disable*/
 export default {
-  inject: ['GStore']
-}
+  inject: ['GStore'],
+};
 </script>
 
 <style>
@@ -40,19 +49,40 @@ export default {
   color: #42b983;
 }
 
-@keyframes bluefade{
-  from{
+@keyframes bluefade {
+  from {
     background: lightblue;
   }
 
-  to{
+  to {
     background: transparent;
   }
 }
 
-#flashMessage{
+#flashMessage {
   animation-name: bluefade;
   animation-duration: 3s;
 }
 
+.fade-enter-from, .fade-leave-to{
+  opacity:0;
+}
+
+.fade-enter-active, .fade-leave-active{
+  transition: opacity 1s ease-out;
+}
+
+.slide-fade-leave-to{
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-from{
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active{
+  transition: all 1s ease;
+}
 </style>

@@ -1,12 +1,14 @@
 <template>
-  <button
+  <!-- <button
     data-toggle="modal"
     data-target="#myModal"
     class="btn btn-danger"
     @click="deleteTask"
   >
     Delete Task
-  </button>
+  </button> -->
+
+  <button class="btn btn-danger" @click="deleteTask">Delete Task</button>
 
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -48,16 +50,16 @@ export default {
           console.log("Task Deleted")
           this.taskText = this.task.title;
           //flash message code goes here
-          //this.GStore.flashMessge = "Task "+ this.task.title + ' was deleted'
+          this.GStore.flashMessage = "Task "+ this.task.title + ' was deleted'
           //reset flash message after 3 seconds
-        //   setTimeout(() => {
-        //       this.GStore.flashMessge = ''
-        //   }, 3000)
-        //   this.$router.push({
-        //       name:'TaskDetails'
-        //       //params: {id: this.task.id}
-        //       //the above line of code is optional/ Id will get populated by default
-        //   })
+          // setTimeout(() => {
+          //     this.GStore.flashMessge = ''
+          // }, 3000)
+          this.$router.push({
+              name:'TaskDetails'
+              //params: {id: this.task.id}
+              //the above line of code is optional/ Id will get populated by default
+          })
       },
       afterModal(){
           this.$router.push({

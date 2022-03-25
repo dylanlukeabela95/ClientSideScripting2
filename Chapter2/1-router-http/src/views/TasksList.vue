@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 21%; margin-left: 40%; ">
+  <div class="card" style="width: 26.5%; margin:auto; ">
     <h3>
       <strong>You are on page {{ page }}</strong>
     </h3>
