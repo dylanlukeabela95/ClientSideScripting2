@@ -1,0 +1,21 @@
+4th April at 11:30am
+
+2 hrs duration
+
+41 marks
+
+Chapter 1-5
+
+C:/vue
+
+No eslint issues
+
+Chpater 1 - Revision Exercise
+
+Chapter 2 - JSON Server, API calls (Axios/fetch)
+
+Chapter 3 - Routing (id)
+
+Chapter 4 - No pagination
+
+Chapter 5 - Simple, Page, Group Animations
