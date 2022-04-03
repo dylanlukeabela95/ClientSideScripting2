@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import TasksList from '../views/TasksList.vue'
 import About from '../views/About.vue'
+import Employee from '../views/Employee.vue'
 import TaskDetails from '../views/task/Details.vue'
 import TaskEdit from '../views/task/Edit.vue'
 import TaskDelete from '../views/task/Delete.vue'
@@ -18,6 +19,11 @@ const routes = [{
         path: '/about',
         name: 'About',
         component: About
+    },
+    {
+        path: '/employee',
+        name: 'Employee',
+        component: Employee
     },
     {
         path: '/tasks/:id',

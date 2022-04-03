@@ -1,16 +1,18 @@
 <template>
   <div>
-    <!-- Display flash message if it is not blank -->
-    <div id="nav">
-      <router-link to="/">Tasks</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <transition name="fade">
       <div v-if="GStore.flashMessage != ''">
         {{ GStore.flashMessage }}
          <button @click="GStore.flashMessage = ''" class="btn btn-secondary">Close</button>
       </div>
     </transition>
+    <!-- Display flash message if it is not blank -->
+    <div id="nav">
+      <router-link to="/">Tasks</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/employee">Employees</router-link>
+    </div>
+    
     <router-view  v-slot="{ Component }">
       <transition name="slide-fade" mode="out-in">
         <component :is="Component"></component>
@@ -83,6 +85,15 @@ export default {
 }
 
 .slide-fade-enter-active, .slide-fade-leave-active{
+  transition: all 1s ease;
+}
+
+.slide-up-enter-from {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.slide-up-enter-active {
   transition: all 1s ease;
 }
 </style>

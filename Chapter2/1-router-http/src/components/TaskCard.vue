@@ -1,32 +1,50 @@
 <template>
   <ul class="list-group list-group-flush">
-    <router-link class="task-link" :to="{name: 'TaskDetails', params: {id: task.id}}">
-      <li class="list-group-item"><b>{{task.title}}</b> on the {{task.date}} @ {{task.time}}</li>
-    </router-link>
+      <router-link
+        class="task-link"
+        :to="{ name: 'TaskDetails', params: { id: task.id } }"
+      >
+        <li class="list-group-item">
+          <b>{{ task.title }}</b> on the {{ task.date }} @ {{ task.time }}
+        </li>
+      </router-link>
   </ul>
 </template>
 
 <script>
 export default {
-  name: 'Task Card',
+  name: "Task Card",
   props: {
-    task: Object
-  }
-}
+    task: Object,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .task-link{
-    text-decoration: none;
-  }
+.task-link {
+  text-decoration: none;
+}
 
-  .task-link:hover{
-    border: 3px solid black;
-  }
+.task-link:hover {
+  border: 3px solid black;
+}
 
-  .task-link:hover > .list-group-item
-  {
-    background-color: lightgray;
-  }
+.task-link:hover > .list-group-item {
+  background-color: lightgray;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-from {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active{
+  transition: all 1s ease;
+}
 </style>

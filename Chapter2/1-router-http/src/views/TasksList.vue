@@ -1,26 +1,28 @@
 <template>
-  <div class="card" style="width: 26.5%; margin:auto; ">
+  <div class="card" style="width: 26.5%; margin: auto">
     <h3>
       <strong>You are on page {{ page }}</strong>
     </h3>
     <div class="card-header">Tasks</div>
+
     <task-card v-for="task in tasks" :key="task.id" :task="task"></task-card>
+
     <div class="pagination">
       <router-link
-        id="prev"
-        :to="{ name: 'TasksList', query: { page: page - 1 } }"
-        v-if="page != 1"
-      >
-        &#60; Prev
-      </router-link>
+          id="prev"
+          :to="{ name: 'TasksList', query: { page: page - 1 } }"
+          v-if="page != 1"
+        >
+          &#60; Prev
+        </router-link>
 
       <router-link
-        id="next"
-        :to="{ name: 'TasksList', query: { page: page + 1 } }"
-        v-if="hasNextPage"
-      >
-        Next &#62;
-      </router-link>
+          id="next"
+          :to="{ name: 'TasksList', query: { page: page + 1 } }"
+          v-if="hasNextPage"
+        >
+          Next &#62;
+        </router-link>
     </div>
   </div>
 </template>
@@ -71,20 +73,19 @@ export default {
     return {
       tasks: null,
       totalTasks: 0,
-
     };
   },
 };
 </script>
 
 <style>
-h3{
+h3 {
   padding: 10px;
 }
 
 .pagination {
   display: flex;
-  width: 385px;
+  width: 99%;
   margin-left: 1%;
 }
 
@@ -100,5 +101,20 @@ h3{
 
 #next {
   text-align: right;
+}
+
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-from {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 1s ease;
 }
 </style>
