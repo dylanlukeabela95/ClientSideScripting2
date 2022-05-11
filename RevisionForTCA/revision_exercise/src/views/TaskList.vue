@@ -1,68 +1,35 @@
 <template>
   <div class="home">
-    <div class="card table" style="width: 24rem;">
+    <div class="card table" style="width: 24rem">
       <div class="card-header">Tasks</div>
-      <task-card v-for="task in tasks" :key="task.id" :task="task"></task-card>
+      <task-card class="taskCard"
+          v-for="task in tasks"
+          :key="task.id"
+          :task="task"
+        ></task-card>
     </div>
   </div>
 </template>
 
 <script>
+/*eslint-disable*/
+import TaskServices from "../services/TaskServices.js";
+
 export default {
-  /*eslint-disable*/
   data() {
     return {
-      // tasks: [
-      //   {
-      //     id: 1,
-      //     title: "Task 1",
-      //     description: "Description for task 1",
-      //     location: "Valletta",
-      //     date: "1st of Jan",
-      //     time: "12:00",
-      //   },
-      //   {
-      //     id: 2,
-      //     title: "Task 2",
-      //     description: "Description for task 1",
-      //     location: "Valletta",
-      //     date: "1st of Jan",
-      //     time: "12:00",
-      //   },
-      //   {
-      //     id: 3,
-      //     title: "Task 3",
-      //     description: "Description for task 1",
-      //     location: "Valletta",
-      //     date: "1st of Jan",
-      //     time: "12:00",
-      //   },
-      //   {
-      //     id: 4,
-      //     title: "Task 4",
-      //     description: "Description for task 1",
-      //     location: "Valletta",
-      //     date: "1st of Jan",
-      //     time: "12:00",
-      //   },
-      //   {
-      //     id: 5,
-      //     title: "Task 5",
-      //     description: "Description for task 1",
-      //     location: "Valletta",
-      //     date: "1st of Jan",
-      //     time: "12:00",
-      //   },
-      //   {
-      //     id: 6,
-      //     title: "Task 6",
-      //     description: "Description for task 1",
-      //     location: "Valletta",
-      //     date: "1st of Jan",
-      //     time: "12:00",
-      //   },
-      // ],
+      tasks: null,
     };
+  },
+
+  created() {
+    TaskServices.getTasks()
+      .then((response) => {
+        this.tasks = response.data;
+      })
+      .catch((error) => {
+        console.log("ERROR - " + error);
+      });
   },
 };
 </script>
@@ -70,5 +37,10 @@ export default {
 <style>
 .table {
   margin: auto;
+}
+
+.taskCard:hover
+{
+  /* border: 2px solid black; */
 }
 </style>
