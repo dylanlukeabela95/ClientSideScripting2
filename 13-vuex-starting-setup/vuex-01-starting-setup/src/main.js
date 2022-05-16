@@ -22,6 +22,12 @@ const store = createStore({
         {
             state.counter += value;
         }
+    }, 
+    getters:{
+        finalCounter(state)
+        {
+            return state.counter
+        }
     }
 })
 
